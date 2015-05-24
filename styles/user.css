@@ -439,7 +439,12 @@ img.fullWidth {
     margin-right: 20px;
 }
 
-.first-red
-{
+.first-red {
     color: red;
+}
+
+.console_position {
+    position: absolute;
+    top: 304px;
+    left: 600px;
 }

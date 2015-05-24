@@ -29,6 +29,126 @@
     </div>
 </section>
 
+<section class="slide">
+    <h2>Generator</h2>
+
+    <p><strike>ES6</strike> ES2015</p>
+
+    <div>
+        <quote>A generator can pause itself in mid-execution, and can be resumed
+            either right away or at a later time.
+        </quote>
+    </div>
+</section>
+
+<section class="slide">
+    <h2><small>Generator.</small> Declaration</h2>
+    <pre class="javascript">
+        <code>function <mark>*</mark>foo() {</code>
+        <code>    // ...</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2><small>Generator.</small> Execution</h2>
+    <pre class="javascript">
+        <code>function *foo(name) {</code>
+        <code>    console.log('Hello, ' + name);</code>
+        <code>}</code>
+        <code> </code>
+        <code>foo('EkbJS');</code>
+    </pre>
+
+    <h3>Console:</h3>
+    <pre class="javascript">
+        <code>&gt;</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2><small>Generator.</small> Execution</h2>
+    <pre class="javascript">
+        <code>function *foo(name) {</code>
+        <code>    console.log('Hello, ' + name);</code>
+        <code>}</code>
+        <code> </code>
+        <code>var it = foo('EkbJS');</code>
+        <code>it.next();</code>
+    </pre>
+
+    <h3>Console:</h3>
+    <pre class="javascript">
+        <code>&gt; Hello, EkbJS</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2><small>Generator.</small> yield</h2>
+    <pre class="javascript">
+        <code>function *foo(name) {</code>
+        <code>    console.log('Hello, ' + name);</code>
+        <code>    <mark>yield;</mark></code>
+        <code>    console.log('Goodbye, ' + name);</code>
+        <code>}</code>
+        <code> </code>
+        <code>var it = foo('EkbJS');</code>
+        <code>it.next();</code>
+        <code>// Do somethings...</code>
+        <code>it.next();</code>
+    </pre>
+
+    <div class="console_position">
+        <h3>Console:</h3>
+        <pre>
+            <code>&gt;</code>
+            <code>&gt; Hello, EkbJS</code>
+            <code>&gt;</code>
+            <code>&gt; Goodbye, EkbJS</code>
+        </pre>
+    </div>
+</section>
+
+<section class="slide">
+    <h2><small>Generator.</small> Receive data</h2>
+    <pre class="javascript">
+        <code>function *foo() {</code>
+        <code>    yield 'Some data';</code>
+        <code>}</code>
+        <code> </code>
+        <code>var it = foo();</code>
+        <code>console.log(it.next());</code>
+    </pre>
+
+    <div>
+        <h3>Console:</h3>
+        <pre>
+            <code>&gt; {value: "Some data", done: false}</code>
+        </pre>
+    </div>
+</section>
+
+<section class="slide">
+    <h2><small>Generator.</small> Send data</h2>
+    <pre class="javascript">
+        <code>function *foo() {</code>
+        <code>    var name = yield;</code>
+        <code>    console.log('Hello, ' + name);</code>
+        <code>}</code>
+        <code> </code>
+        <code>var it = foo();</code>
+        <code>it.next();</code>
+        <code>it.next('EkbJS');</code>
+    </pre>
+
+    <div>
+        <h3>Console:</h3>
+        <pre>
+            <code>&gt; Hello, EkbJS</code>
+        </pre>
+    </div>
+</section>
+
 <div class="progress">
     <div></div>
 </div>
