@@ -1,44 +1,24 @@
-function getFinesByCarNumber(carNumber, cb) {
-    setTimeout(function () {
-        cb(['001', '002', '003']);
-    }, 2);
-}
-
-function getFinesByDriverCard(driverCard, cb) {
-    setTimeout(function () {
-        cb(['004', '005']);
-    }, 1);
-}
-
-function isFinesUnpaid(fine, cb) {
-    setTimeout(function () {
-        cb(Math.random() > 0.7);
-    }, 5);
-}
+var getFinesByCarNumber = require('./getFinesByCarNumber');
+var getFinesByDriverCard = require('./getFinesByDriverCard');
+var isFineUnpaid = require('./isFineUnpaid');
 
 function getUnpaidFines(carNumber, driverCard, cb) {
-    var fines = [];
-    var readyCounter = 0;
-
+    var fines = [], getFinesCounter = 2;
     function onGetFinesReady(data) {
         fines = fines.concat(data);
-        if (++readyCounter < 2) {
-            return;
-        }
+        if (--getFinesCounter > 0) { return; }
 
-        var unpaidFines = [];
-        (function getUnpaidFines() {
-            if (!fines.length) {
-                return cb(unpaidFines);
-            }
-            var fine = fines.shift();
-            isFinesUnpaid(fine, function (isUnpaid) {
-                isUnpaid && unpaidFines.push(fine);
-                getUnpaidFines();
-            });
-        })();
+        var unpaidFines = 0, isUnpaidCounter = fines.length;
+        fines.forEach(function (fine) {
+            isFineUnpaid(fine, function (isUnpaid) {
+                if (--isUnpaidCounter > 0) {
+                    isUnpaid && unpaidFines++;
+                } else {
+                    cb(unpaidFines);
+                }
+            })
+        });
     }
-
     getFinesByCarNumber(carNumber, onGetFinesReady);
     getFinesByDriverCard(driverCard, onGetFinesReady);
 }

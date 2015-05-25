@@ -451,7 +451,7 @@ img.fullWidth {
 
 .async_header {
     position: absolute !important;
-    top: 170px;
+    top: 30px;
     left: 640px;
     text-align: right;
 }

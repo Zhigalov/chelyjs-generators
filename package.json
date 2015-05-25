@@ -1,0 +1,18 @@
+{
+  "name": "ekbjs-generators",
+  "version": "1.0.0",
+  "description": "Slides for talk on EkbJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.yandex-team.ru:zhigalov/ekbjs-generators.git"
+  },
+  "author": "Sergey Zhigalov <zhigalov@yandex-team.ru>",
+  "license": "MIT",
+  "dependencies": {
+    "vow": "^0.4.9"
+  }
+}
