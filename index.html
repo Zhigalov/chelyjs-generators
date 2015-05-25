@@ -250,6 +250,224 @@
     </ul>
 </section>
 
+<section class="slide">
+    <h2 class="async_header">
+        <small>Асинхронность.</small><br/>
+        Callback
+    </h2>
+    <pre class="javascript" style="position: absolute; top: 0">
+        <code>function getUnpaidFines(carNumber, driverCard, cb) {</code>
+        <code>    var fines = [], readyCounter = 0;</code>
+        <code>    function onGetFinesReady(data) {</code>
+        <code>        fines = fines.concat(data);</code>
+        <code>        if (++readyCounter < 2) { return; }</code>
+        <code>        var unpaidFines = [];</code>
+        <code>        (function getUnpaidFines() {</code>
+        <code>            if (!fines.length) {</code>
+        <code>                return cb(unpaidFines);</code>
+        <code>            }</code>
+        <code>            var fine = fines.shift();</code>
+        <code>            isFinesUnpaid(fine, function (isUnpaid) {</code>
+        <code>                isUnpaid && unpaidFines.push(fine);</code>
+        <code>                getUnpaidFines();</code>
+        <code>            });</code>
+        <code>        })();</code>
+        <code>    }</code>
+        <code>    getFinesByCarNumber(carNumber, onGetFinesReady);</code>
+        <code>    getFinesByDriverCard(driverCard, onGetFinesReady);</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2 class="async_header">
+        <small>Асинхронность.</small><br/>
+        Callback
+    </h2>
+    <pre class="javascript" style="position: absolute; top: 0">
+        <code>function getUnpaidFines(carNumber, driverCard, cb) {</code>
+        <code>    var fines = [], readyCounter = 0;</code>
+        <code>    function onGetFinesReady(data) {</code>
+        <code>        fines = fines.concat(data);</code>
+        <code>        if (++readyCounter < 2) { return; }</code>
+        <code>        var unpaidFines = [];</code>
+        <code>        (function getUnpaidFines() {</code>
+        <code>            if (!fines.length) {</code>
+        <code>                return cb(unpaidFines);</code>
+        <code>            }</code>
+        <code>            var fine = fines.shift();</code>
+        <code>            isFinesUnpaid(fine, function (isUnpaid) {</code>
+        <code>                isUnpaid && unpaidFines.push(fine);</code>
+        <code>                getUnpaidFines();</code>
+        <code>            });</code>
+        <code>        })();</code>
+        <code>    }</code>
+        <code>    <mark>getFinesByCarNumber</mark>(carNumber, onGetFinesReady);</code>
+        <code>    <mark>getFinesByDriverCard</mark>(driverCard, onGetFinesReady);</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2 class="async_header">
+        <small>Асинхронность.</small><br/>
+        Callback
+    </h2>
+    <pre class="javascript" style="position: absolute; top: 0">
+        <code>function getUnpaidFines(carNumber, driverCard, cb) {</code>
+        <code>    var fines = [], readyCounter = 0;</code>
+        <code>    function <mark>onGetFinesReady</mark>(data) {</code>
+        <code>        fines = fines.concat(data);</code>
+        <code>        if (++readyCounter < 2) { return; }</code>
+        <code>        var unpaidFines = [];</code>
+        <code>        (function getUnpaidFines() {</code>
+        <code>            if (!fines.length) {</code>
+        <code>                return cb(unpaidFines);</code>
+        <code>            }</code>
+        <code>            var fine = fines.shift();</code>
+        <code>            isFinesUnpaid(fine, function (isUnpaid) {</code>
+        <code>                isUnpaid && unpaidFines.push(fine);</code>
+        <code>                getUnpaidFines();</code>
+        <code>            });</code>
+        <code>        })();</code>
+        <code>    }</code>
+        <code>    getFinesByCarNumber(carNumber, <mark>onGetFinesReady</mark>);</code>
+        <code>    getFinesByDriverCard(driverCard, <mark>onGetFinesReady</mark>);</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2 class="async_header">
+        <small>Асинхронность.</small><br/>
+        Callback
+    </h2>
+    <pre class="javascript" style="position: absolute; top: 0">
+        <code>function getUnpaidFines(carNumber, driverCard, cb) {</code>
+        <code>    var fines = [], readyCounter = 0;</code>
+        <code>    function onGetFinesReady(data) {</code>
+        <code>        fines = fines.concat(data);</code>
+        <code>        <mark>if (++readyCounter < 2) { return; }</mark></code>
+        <code>        var unpaidFines = [];</code>
+        <code>        (function getUnpaidFines() {</code>
+        <code>            if (!fines.length) {</code>
+        <code>                return cb(unpaidFines);</code>
+        <code>            }</code>
+        <code>            var fine = fines.shift();</code>
+        <code>            isFinesUnpaid(fine, function (isUnpaid) {</code>
+        <code>                isUnpaid && unpaidFines.push(fine);</code>
+        <code>                getUnpaidFines();</code>
+        <code>            });</code>
+        <code>        })();</code>
+        <code>    }</code>
+        <code>    getFinesByCarNumber(carNumber, onGetFinesReady);</code>
+        <code>    getFinesByDriverCard(driverCard, onGetFinesReady);</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2 class="async_header">
+        <small>Асинхронность.</small><br/>
+        Callback
+    </h2>
+    <pre class="javascript" style="position: absolute; top: 0">
+        <code>function getUnpaidFines(carNumber, driverCard, cb) {</code>
+        <code>    var fines = [], readyCounter = 0;</code>
+        <code>    function onGetFinesReady(data) {</code>
+        <code>        fines = fines.concat(data);</code>
+        <code>        if (++readyCounter < 2) { return; }</code>
+        <code>        var unpaidFines = [];</code>
+        <code>        (function <mark>getUnpaidFines</mark>() {</code>
+        <code>            if (!fines.length) {</code>
+        <code>                return cb(unpaidFines);</code>
+        <code>            }</code>
+        <code>            var fine = fines.shift();</code>
+        <code>            isFinesUnpaid(fine, function (isUnpaid) {</code>
+        <code>                isUnpaid && unpaidFines.push(fine);</code>
+        <code>                getUnpaidFines();</code>
+        <code>            });</code>
+        <code>        })<mark>()</mark>;</code>
+        <code>    }</code>
+        <code>    getFinesByCarNumber(carNumber, onGetFinesReady);</code>
+        <code>    getFinesByDriverCard(driverCard, onGetFinesReady);</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2 class="async_header">
+        <small>Асинхронность.</small><br/>
+        Callback
+    </h2>
+    <pre class="javascript" style="position: absolute; top: 0">
+        <code>function getUnpaidFines(carNumber, driverCard, cb) {</code>
+        <code>    var fines = [], readyCounter = 0;</code>
+        <code>    function onGetFinesReady(data) {</code>
+        <code>        fines = fines.concat(data);</code>
+        <code>        if (++readyCounter < 2) { return; }</code>
+        <code>        var unpaidFines = [];</code>
+        <code>        (function getUnpaidFines() {</code>
+        <code>            if (!fines.length) {</code>
+        <code>                <mark>return cb(unpaidFines);</mark></code>
+        <code>            }</code>
+        <code>            var fine = fines.shift();</code>
+        <code>            isFinesUnpaid(fine, function (isUnpaid) {</code>
+        <code>                isUnpaid && unpaidFines.push(fine);</code>
+        <code>                getUnpaidFines();</code>
+        <code>            });</code>
+        <code>        })();</code>
+        <code>    }</code>
+        <code>    getFinesByCarNumber(carNumber, onGetFinesReady);</code>
+        <code>    getFinesByDriverCard(driverCard, onGetFinesReady);</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2 class="async_header">
+        <small>Асинхронность.</small><br/>
+        Callback
+    </h2>
+    <pre class="javascript" style="position: absolute; top: 0">
+        <code>function getUnpaidFines(carNumber, driverCard, cb) {</code>
+        <code>    var fines = [], readyCounter = 0;</code>
+        <code>    function onGetFinesReady(data) {</code>
+        <code>        fines = fines.concat(data);</code>
+        <code>        if (++readyCounter < 2) { return; }</code>
+        <code>        var unpaidFines = [];</code>
+        <code>        (function getUnpaidFines() {</code>
+        <code>            if (!fines.length) {</code>
+        <code>                return cb(unpaidFines);</code>
+        <code>            }</code>
+        <code>            var fine = fines.shift();</code>
+        <code>            <mark>isFinesUnpaid</mark>(fine, function (isUnpaid) {</code>
+        <code>                isUnpaid && <mark>unpaidFines.push(fine);</mark></code>
+        <code>                getUnpaidFines();</code>
+        <code>            });</code>
+        <code>        })();</code>
+        <code>    }</code>
+        <code>    getFinesByCarNumber(carNumber, onGetFinesReady);</code>
+        <code>    getFinesByDriverCard(driverCard, onGetFinesReady);</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2><small>Асинхронность.</small>Callback</h2>
+    <ul class="custom-list">
+        <li class="done">Минимум накладных расходов</li>
+        <li class="fail">Обработка ошибок
+            <ul>
+                <li><strike>try { ... } catch(e) { ... }</strike></li>
+                <li>cb(err, data)</li>
+                <li>if (error) { ... }</li>
+            </ul>
+        </li>
+        <li class="fail">Код нужно читать в обратном порядке</li>
+    </ul>
+</section>
+
 <div class="progress">
     <div></div>
 </div>

@@ -448,3 +448,10 @@ img.fullWidth {
     top: 304px;
     left: 600px;
 }
+
+.async_header {
+    position: absolute !important;
+    top: 170px;
+    left: 640px;
+    text-align: right;
+}
