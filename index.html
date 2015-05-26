@@ -138,6 +138,29 @@
 </section>
 
 <section class="slide">
+    <h2><small>Generator.</small> Фибоначи</h2>
+    <pre class="javascript">
+        <code>function* fibonacci() {</code>
+        <code>    var a = 0, b = 1, tmp;</code>
+        <code>    while (true) {</code>
+        <code>        yield a;</code>
+        <code>        tmp = a;</code>
+        <code>        a = b;</code>
+        <code>        b = tmp + b;</code>
+        <code>    }</code>
+        <code>}</code>
+        <code>        </code>
+        <code>var it = fibonacci();</code>
+        <code>console.log(it.next().value); // 0</code>
+        <code>console.log(it.next().value); // 1</code>
+        <code>console.log(it.next().value); // 1</code>
+        <code>console.log(it.next().value); // 2</code>
+        <code>console.log(it.next().value); // 3</code>
+        <code>console.log(it.next().value); // 5</code>
+    </pre>
+</section>
+
+<section class="slide">
     <h2><small>Generator.</small> Send data</h2>
     <pre class="javascript">
         <code>function *foo() {</code>
