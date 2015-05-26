@@ -35,9 +35,9 @@
     <p><strike>ES6</strike> ES2015</p>
 
     <div>
-        <quote>A generator can pause itself in mid-execution, and can be resumed
+        <blockquote>A generator can pause itself in mid-execution, and can be resumed
             either right away or at a later time.
-        </quote>
+        </blockquote>
     </div>
 </section>
 
@@ -283,7 +283,7 @@
     <h2><small>Асинхронность.</small> Callback</h2>
     <ul class="custom-list">
         <li class="done">Минимум накладных расходов</li>
-        <li class="fail">Обработка ошибок
+        <li class="fail">Обработка ошибок:
             <ul class="custom-list">
                 <li class="fail"><strike>try { ... } catch(e) { ... }</strike></li>
                 <li class="fail">cb(err, data)</li>
@@ -296,7 +296,7 @@
 </section>
 
 <section class="slide">
-    <h2 style="position: absolute; top: 0;"><small>Асинхронность.</small>Promises</h2>
+    <h2 style="position: absolute; top: 0;"><small>Асинхронность.</small> Promises</h2>
     <pre class="javascript" style="margin-top: 30px;">
         <code>function getUnpaidFines(carNumber, driverCard) {</code>
         <code>    return Vow</code>
@@ -338,7 +338,7 @@
     <h2><small>Асинхронность.</small> Promises</h2>
     <ul class="custom-list">
         <li class="fail">Накладные расходы</li>
-        <li class="pending">Обработка ошибок
+        <li class="pending">Обработка ошибок:
             <ul class="custom-list">
                 <li class="fail"><strike>try { ... } catch(e) { ... }</strike></li>
                 <li class="done">Обработка в блоке .fail()</li>
@@ -346,6 +346,46 @@
         </li>
         <li class="done">Код читается и исполняется сверху вниз</li>
         <li class="pending">Меньше шума</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2><small>Асинхронность.</small> Generator</h2>
+    <h3>CO</h3>
+    <blockquote>Generator based control flow goodness for nodejs and the browser, using promises,
+        letting you write non-blocking code in a nice-ish way.</blockquote>
+    <a href="https://github.com/tj/co">https://github.com/tj/co</a>
+</section>
+
+<section class="slide">
+    <h2><small>Асинхронность.</small> Generator</h2>
+    <pre class="javascript">
+        <code>var getUnpaidFines = co.wrap(function *(carNumber, driverCard) {</code>
+        <code>    var data = yield {</code>
+        <code>        finesByCarNumber: getFinesByCarNumber(carNumber),</code>
+        <code>        finesByDriverCard: getFinesByDriverCard(driverCard)</code>
+        <code>    };</code>
+        <code>    var fines = data.finesByCarNumber.concat(data.finesByDriverCard);</code>
+        <code>    var isFinesUnpaid = yield fines.map(isFineUnpaid);</code>
+        <code>    return isFinesUnpaid.reduce(function (isFineUnpaid, acc) {</code>
+        <code>        return acc + Number(isFineUnpaid);</code>
+        <code>    }, 0);</code>
+        <code>});</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2><small>Асинхронность.</small> Generator</h2>
+    <ul class="custom-list">
+        <li class="fail">Накладные расходы</li>
+        <li class="done">Обработка ошибок:
+            <ul class="custom-list">
+                <li class="done">try { ... } catch(e) { ... }</li>
+                <li class="done">Обработка в блоке .catch()</li>
+            </ul>
+        </li>
+        <li class="done">Код читается и исполняется сверху вниз</li>
+        <li class="done">Минимум шума</li>
     </ul>
 </section>
 
