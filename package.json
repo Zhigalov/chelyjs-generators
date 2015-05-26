@@ -13,6 +13,7 @@
   "author": "Sergey Zhigalov <zhigalov@yandex-team.ru>",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^2.9.26",
     "co": "^4.5.4",
     "vow": "^0.4.9"
   }

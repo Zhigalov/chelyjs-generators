@@ -1,50 +1,21 @@
-var Vow = require('vow');
+var Promise = require('bluebird');
+var getFinesByCarNumber = Promise.promisify(require('./getFinesByCarNumber'));
+var isFineUnpaid = Promise.promisify(require('./isFineUnpaid'));
+var filterUnpaidFines = require('./filterUnpaidFines');
 
-var getFinesByCarNumber = function (carNumber) {
-    var defer = new Vow.defer();
-    require('./getFinesByCarNumber')(carNumber, function (data) {
-        defer.resolve(data);
-    });
-    return defer.promise();
-};
-
-var getFinesByDriverCard = function (carNumber) {
-    var defer = new Vow.defer();
-    require('./getFinesByDriverCard')(carNumber, function (data) {
-        defer.resolve(data);
-    });
-    return defer.promise();
-};
-
-var isFineUnpaid = function (carNumber) {
-    var defer = new Vow.defer();
-    require('./isFineUnpaid')(carNumber, function (data) {
-        defer.resolve(data);
-    });
-    return defer.promise();
-};
-
-function getUnpaidFines(carNumber, driverCard) {
-    return Vow
-        .all({
-            finesByCarNumber: getFinesByCarNumber(carNumber),
-            finesByDriverCard: getFinesByDriverCard(driverCard)
+function getUnpaidFines(carNumber) {
+    return getFinesByCarNumber(carNumber)
+        .then(function (fines) {
+            return Promise.props({
+                fines: fines,
+                isUnpaidFines: Promise.all(fines.map(isFineUnpaid))
+            });
         })
         .then(function (data) {
-            var fines = data.finesByCarNumber.concat(data.finesByDriverCard);
-            return Vow.all(fines.map(isFineUnpaid));
-        })
-        .then(function (isFinesUnpaid) {
-            return isFinesUnpaid.reduce(function (isFineUnpaid, acc) {
-                return acc + Number(isFineUnpaid);
-            }, 0)
+            return filterUnpaidFines(data.fines, data.isUnpaidFines)
         });
 }
 
-getUnpaidFines('ABC', 'DEF')
-    .then(function (unpaidFines) {
-        console.log(unpaidFines);
-    })
-    .fail(function (err) {
-        console.error(err.stack);
-    });
+getUnpaidFines('A263BC')
+    .then(console.log.bind(console))
+    .catch(console.error.bind(console));
