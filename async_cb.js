@@ -21,5 +21,9 @@ function getUnpaidFines(carNumber, cb) {
 }
 
 getUnpaidFines('A263BC', function (err, unpaidFines) {
-    console.log(err, unpaidFines);
+    if (err) {
+        console.error(err);
+    } else {
+        console.log(unpaidFines);
+    }
 });
