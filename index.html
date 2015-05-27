@@ -30,6 +30,208 @@
 </section>
 
 <section class="slide">
+    <h2>Список неоплаченных штрафов</h2>
+    <ol>
+        <li>Ввести номер автомобиля</li>
+        <li>Получить по номеру автомобиля список штрафов</li>
+        <li>Получить по каждому штрафу статус оплаты</li>
+        <li>Вывести неоплаченные штрафы</li>
+    </ol>
+</section>
+
+<section class="slide">
+    <h2 style="position: absolute; top: 0;">Callback</h2>
+    <pre class="javascript" style="margin-top: 10px">
+        <code>function getUnpaidFines(carNumber, cb) {</code>
+        <code>    getFinesByCarNumber(carNumber, function (err, fines) {</code>
+        <code>        if (err) { cb(err); }</code>
+        <code>        var isUnpaidFines = [];</code>
+        <code>        var finesCounter = fines.length;</code>
+        <code>        fines.forEach(function (fine, index) {</code>
+        <code>            isFineUnpaid(fine, function (err, isUnpaid) {</code>
+        <code>                if (err) { cb(err); }</code>
+        <code>                isUnpaidFines[index] = isUnpaid;</code>
+        <code>                if (--finesCounter === 0) {</code>
+        <code>                    var unpaidFines = filterUnpaidFines(fines, isUnpaidFines);</code>
+        <code>                    cb(null, unpaidFines);</code>
+        <code>                }</code>
+        <code>            })</code>
+        <code>        });</code>
+        <code>    });</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide cover w" style="text-align: center; ">
+    <img src="images/catIsSad.gif" alt="catIsSad" />
+</section>
+
+<section class="slide">
+    <h2 style="position: absolute; top: 0;">Callback</h2>
+    <pre class="javascript" style="margin-top: 10px">
+        <code>function getUnpaidFines(carNumber, cb) {</code>
+        <code>    getFinesByCarNumber(carNumber, function (err, fines) {</code>
+        <code>        if (err) { cb(err); }</code>
+        <code>        var isUnpaidFines = [];</code>
+        <code>        var finesCounter = fines.length;</code>
+        <code>        fines.forEach(function (fine, index) {</code>
+        <code>            isFineUnpaid(fine, function (err, isUnpaid) {</code>
+        <code>                if (err) { cb(err); }</code>
+        <code>                isUnpaidFines[index] = isUnpaid;</code>
+        <code>                if (--finesCounter === 0) {</code>
+        <code>                    var unpaidFines = filterUnpaidFines(fines, isUnpaidFines);</code>
+        <code>                    cb(null, unpaidFines);</code>
+        <code>                }</code>
+        <code>            })</code>
+        <code>        });</code>
+        <code>    });</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2 style="position: absolute; top: 0;">Callback</h2>
+    <pre class="javascript" style="margin-top: 10px">
+        <code>function getUnpaidFines(<mark>Ввести номер автомобиля</mark>, cb) {</code>
+        <code>    <mark>Получить список штрафов</mark>(carNumber, function (err, fines) {</code>
+        <code>        if (err) { cb(err); }</code>
+        <code>        var isUnpaidFines = [];</code>
+        <code>        var finesCounter = fines.length;</code>
+        <code>        fines.forEach(function (fine, index) {</code>
+        <code>            <mark>Получить статус оплаты</mark>(fine, function (err, isUnpaid) {</code>
+        <code>                if (err) { cb(err); }</code>
+        <code>                isUnpaidFines[index] = isUnpaid;</code>
+        <code>                if (--finesCounter === 0) {</code>
+        <code>                    var unpaidFines = <mark>Вывести неоплаченные штрафы</mark></code>
+        <code>                    cb(null, unpaidFines);</code>
+        <code>                }</code>
+        <code>            })</code>
+        <code>        });</code>
+        <code>    });</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2>Callback</h2>
+    <ul class="custom-list">
+        <li class="done">Минимум накладных расходов</li>
+        <li class="fail">Много шума</li>
+        <li class="fail">Глубокий уровень вложенности</li>
+        <li class="fail">Обработка ошибок
+            <ul class="custom-list">
+                <li class="fail">cb(err, data)</li>
+                <li class="fail">if (err) { cb(err); }</li>
+                <li class="fail"><strike>try { ... } catch(e) { ... }</strike></li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Promises</h2>
+    <pre class="javascript">
+        <code>function getUnpaidFines(carNumber) {</code>
+        <code>    return getFinesByCarNumber(carNumber)</code>
+        <code>        .then(function (fines) {</code>
+        <code>            return Promise.props({</code>
+        <code>                fines: fines,</code>
+        <code>                isUnpaidFines: Promise.all(fines.map(isFineUnpaid))</code>
+        <code>            });</code>
+        <code>        })</code>
+        <code>        .then(function (data) {</code>
+        <code>            return filterUnpaidFines(data.fines, data.isUnpaidFines);</code>
+        <code>        });</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2>Promises</h2>
+    <pre class="javascript">
+        <code>function getUnpaidFines(<mark>Ввести номер автомобиля</mark>) {</code>
+        <code>    return <mark>Получить список штрафов</mark>(carNumber)</code>
+        <code>        .then(function (fines) {</code>
+        <code>            return Promise.props({</code>
+        <code>                fines: fines,</code>
+        <code>                isUnpaidFines: Promise.all(<mark>Получить статус оплаты</mark>)</code>
+        <code>            });</code>
+        <code>        })</code>
+        <code>        .then(function (data) {</code>
+        <code>            return <mark>Вывести неоплаченные штрафы</mark>(...);</code>
+        <code>        });</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2><small>Promises.</small> Bluebird</h2>
+    <img src="images/bluebird.png" alt="bluebird" style="position: absolute; right: 90px;"/>
+    <a href="https://github.com/petkaantonov/bluebird">https://github.com/petkaantonov/bluebird</a>
+    <ul>
+        <li>Promise.promisify
+            <pre class="javascript">
+                <code>var myPromisifyFunction = Promise.promisify(myFunction)</code>
+                <code> </code>
+                <code>function myFunction(arg1, arg2, cb) {</code>
+                <code>    cb(err, data)</code>
+                <code>}</code>
+            </pre>
+        </li>
+        <li>Promise.all</li>
+        <li>Promise.props</li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Promises</h2>
+    <ul class="custom-list">
+        <li class="fail">Накладные расходы</li>
+        <li class="pending">Меньше шума</li>
+        <li class="pending">Неглубокий уровень вложенности</li>
+        <li class="pending">Обработка ошибок
+            <ul class="custom-list">
+                <li class="done">Обработка в блоке .catch()</li>
+                <li class="fail"><strike>try { ... } catch(e) { ... }</strike></li>
+            </ul>
+        </li>
+    </ul>
+</section>
+
+<section class="slide">
+    <h2>Код моей мечты</h2>
+    <pre class="javascript">
+        <code>var getUnpaidFines = function(<mark>Ввести номер автомобиля</mark>) {</code>
+        <code>    var fines = <mark>Получить список штрафов</mark>(carNumber);</code>
+        <code>    var isUnpaidFines = fines.map(<mark>Получить статус оплаты</mark>);</code>
+        <code>    return <mark>Вывести неоплаченные штрафы</mark>(fines, isUnpaidFines);</code>
+        <code>};</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2>Код моей мечты</h2>
+    <pre class="javascript">
+        <code>var getUnpaidFines = function (carNumber) {</code>
+        <code>    var fines = getFinesByCarNumber(carNumber);</code>
+        <code>    var isUnpaidFines = fines.map(isFineUnpaid);</code>
+        <code>    return filterUnpaidFines(fines, isUnpaidFines);</code>
+        <code>}</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2><small>Код моей мечты.</small> Generator</h2>
+    <pre class="javascript">
+        <code>var getUnpaidFines = co.wrap(function *(carNumber) {</code>
+        <code>    var fines = yield getFinesByCarNumber(carNumber);</code>
+        <code>    var isUnpaidFines = yield fines.map(isFineUnpaid);</code>
+        <code>    return filterUnpaidFines(fines, isUnpaidFines);</code>
+        <code>});</code>
+    </pre>
+</section>
+
+<section class="slide">
     <h2>Generator</h2>
     <div>
         <blockquote>A generator can pause itself in mid-execution, and can be resumed
@@ -42,8 +244,8 @@
 <section class="slide">
     <h2><small>Generator.</small> Declaration</h2>
     <pre class="javascript">
-        <code>function <mark>*</mark>foo() {</code>
-        <code>    // ...</code>
+        <code>function <mark>*</mark>foo(name) {</code>
+        <code>    console.log('Hello, ' + name);</code>
         <code>}</code>
     </pre>
 </section>
@@ -115,6 +317,10 @@
             <code>&gt; Goodbye, EkbJS</code>
         </pre>
     </div>
+</section>
+
+<section class="slide cover h   ">
+    <img src="images/catsPingPong.gif" alt="Sand-receive data"/>
 </section>
 
 <section class="slide">
@@ -197,209 +403,8 @@
     </div>
 </section>
 
-<section class="slide caption">
-    <h2>yield *</h2>
-    <img src="images/recursia.gif" alt="recursion"/>
-</section>
-
 <section class="slide">
-    <h2><small>Generator.</small> yield *</h2>
-    <pre class="javascript">
-        <code>function *foo() {</code>
-        <code>    yield 2;</code>
-        <code>    yield 3;</code>
-        <code>}</code>
-        <code> </code>
-        <code>function *bar() {</code>
-        <code>    yield 1;</code>
-        <code>    yield *foo();</code>
-        <code>}</code>
-        <code> </code>
-        <code>var it = bar();</code>
-        <code>console.log(it.next());</code>
-        <code>console.log(it.next());</code>
-        <code>console.log(it.next());</code>
-    </pre>
-
-    <div class="console_position" style="top: 464px">
-        <h3>Console:</h3>
-        <pre>
-            <code>&gt; {value: 1, done: false}</code>
-            <code>&gt; {value: 2, done: false}</code>
-            <code>&gt; {value: 3, done: false}</code>
-        </pre>
-    </div>
-</section>
-
-<section class="slide">
-    <h2><small>Generator.</small> yield *</h2>
-    <pre class="javascript">
-        <code>function *foo() {</code>
-        <code>    yield 2;</code>
-        <code>    yield 3;</code>
-        <code>}</code>
-        <code> </code>
-        <code>function *bar() {</code>
-        <code>    yield 1;</code>
-        <code>    yield *foo();</code>
-        <code>}</code>
-        <code> </code>
-        <code>for(var val of bar()) {</code>
-        <code>    console.log(val);</code>
-        <code>}</code>
-    </pre>
-
-    <div class="console_position" style="top: 464px">
-        <h3>Console:</h3>
-        <pre>
-            <code>&gt; 1</code>
-            <code>&gt; 2</code>
-            <code>&gt; 3</code>
-        </pre>
-    </div>
-</section>
-
-<section class="slide">
-    <h2><small>Асинхронность.</small> Задача</h2>
-    <h3>Список неоплаченных штрафов</h3>
-    <ul>
-        <li>Ввести номер автомобиля</li>
-        <li>Получить по номеру автомобиля список штрафов</li>
-        <li>Получить по каждому штрафу статус оплаты</li>
-        <li>Вывести неоплаченные штрафы</li>
-    </ul>
-</section>
-
-<section class="slide">
-    <h2 style="position: absolute; top: 0;"><small>Асинхронность.</small> Callback</h2>
-    <pre class="javascript" style="margin-top: 10px">
-        <code>function getUnpaidFines(carNumber, cb) {</code>
-        <code>    getFinesByCarNumber(carNumber, function (err, fines) {</code>
-        <code>        if (err) { cb(err); }</code>
-        <code>        var isUnpaidFines = [];</code>
-        <code>        var finesCounter = fines.length;</code>
-        <code>        fines.forEach(function (fine, index) {</code>
-        <code>            isFineUnpaid(fine, function (err, isUnpaid) {</code>
-        <code>                if (err) { cb(err); }</code>
-        <code>                isUnpaidFines[index] = isUnpaid;</code>
-        <code>                if (--finesCounter === 0) {</code>
-        <code>                    var unpaidFines = filterUnpaidFines(fines, isUnpaidFines);</code>
-        <code>                    cb(null, unpaidFines);</code>
-        <code>                }</code>
-        <code>            })</code>
-        <code>        });</code>
-        <code>    });</code>
-        <code>}</code>
-    </pre>
-</section>
-
-<section class="slide" style="text-align: center; ">
-    <img src="images/catIsVacuumed.gif" alt="catIsVacuumed" />
-</section>
-
-<section class="slide">
-    <h2><small>Асинхронность.</small> Callback</h2>
-    <h3>Запуск:</h3>
-    <pre class="javascript">
-        <code>getUnpaidFines('A263BC', function (err, unpaidFines) {</code>
-        <code>    if (err) {</code>
-        <code>        console.error(err);</code>
-        <code>    } else {</code>
-        <code>        console.log(unpaidFines);</code>
-        <code>    }</code>
-        <code>});</code>
-    </pre>
-</section>
-
-<section class="slide">
-    <h2><small>Асинхронность.</small> Callback</h2>
-    <ul class="custom-list">
-        <li class="done">Минимум накладных расходов</li>
-        <li class="fail">Глубокий уровень вложенности</li>
-        <li class="fail">Обработка ошибок:
-            <ul class="custom-list">
-                <li class="fail"><strike>try { ... } catch(e) { ... }</strike></li>
-                <li class="fail">cb(err, data)</li>
-                <li class="fail">if (err) { cb(err); }</li>
-            </ul>
-        </li>
-        <li class="fail">Много шума</li>
-    </ul>
-</section>
-
-<section class="slide">
-    <h2><small>Асинхронность.</small> Bluebird</h2>
-    <img src="images/bluebird.png" alt="bluebird" style="position: absolute; right: 90px;"/>
-    <a href="https://github.com/petkaantonov/bluebird">https://github.com/petkaantonov/bluebird</a>
-    <ul>
-        <li>Promise.promisify:
-            <pre class="javascript">
-                <code>function myFunction(arg1, arg2, cb) {</code>
-                <code>    cb(err, data)</code>
-                <code>}</code>
-                <code> </code>
-                <code>var myPromisifyFunction = Promise.promisify(myFunction)</code>
-            </pre>
-        </li>
-        <li>Promise.all</li>
-        <li>Promise.props</li>
-    </ul>
-</section>
-
-<section class="slide">
-    <h2><small>Асинхронность.</small> Promises</h2>
-    <pre class="javascript">
-<code>function getUnpaidFines(carNumber) {</code>
-<code>    return getFinesByCarNumber(carNumber)</code>
-<code>        .then(function (fines) {</code>
-<code>            return Promise.props({</code>
-<code>                fines: fines,</code>
-<code>                isUnpaidFines: Promise.all(fines.map(isFineUnpaid))</code>
-<code>            });</code>
-<code>        })</code>
-<code>        .then(function (data) {</code>
-<code>            return filterUnpaidFines(data.fines, data.isUnpaidFines);</code>
-<code>        });</code>
-<code>}</code>
-    </pre>
-</section>
-
-
-<section class="slide">
-    <h2><small>Асинхронность.</small> Promises</h2>
-    <h3>Запуск:</h3>
-    <pre class="javascript">
-<code>getUnpaidFines('A263BC')</code>
-<code>    .then(console.log.bind(console))</code>
-<code>    .catch(console.error.bind(console));</code>
-    </pre>
-</section>
-
-<section class="slide">
-    <h2><small>Асинхронность.</small> Promises</h2>
-    <ul class="custom-list">
-        <li class="fail">Накладные расходы</li>
-        <li class="pending">Неглубокий уровень вложенности</li>
-        <li class="pending">Обработка ошибок:
-            <ul class="custom-list">
-                <li class="fail"><strike>try { ... } catch(e) { ... }</strike></li>
-                <li class="done">Обработка в блоке .catch()</li>
-            </ul>
-        </li>
-        <li class="pending">Меньше шума</li>
-    </ul>
-</section>
-
-<section class="slide">
-    <h2><small>Асинхронность.</small> Generator</h2>
-    <h3>CO</h3>
-    <blockquote>Generator based control flow goodness for nodejs and the browser, using promises,
-        letting you write non-blocking code in a nice-ish way.</blockquote>
-    <a href="https://github.com/tj/co">https://github.com/tj/co</a>
-</section>
-
-<section class="slide">
-    <h2><small>Асинхронность.</small> Generator</h2>
+    <h2>Generator</h2>
     <pre class="javascript">
         <code>var getUnpaidFines = co.wrap(function *(carNumber) {</code>
         <code>    var fines = yield getFinesByCarNumber(carNumber);</code>
@@ -410,7 +415,15 @@
 </section>
 
 <section class="slide">
-    <h2><small>Асинхронность.</small> Generator</h2>
+    <h2><small>Generator.</small> CO</h2>
+    <blockquote>Generator based control flow goodness for nodejs and the browser, using promises,
+        letting you write non-blocking code in a nice-ish way.</blockquote>
+    <a href="https://github.com/tj/co">https://github.com/tj/co</a>
+</section>
+
+
+<section class="slide">
+    <h2><small>Generator.</small> Запуск</h2>
     <pre class="javascript">
         <code>getUnpaidFines('A263BC')</code>
         <code>    .then(console.log.bind(console))</code>
@@ -419,7 +432,7 @@
 </section>
 
 <section class="slide">
-    <h2><small>Асинхронность.</small> Generator</h2>
+    <h2>Generator</h2>
     <ul class="custom-list">
         <li class="fail">Накладные расходы</li>
         <li class="done">Один уровень вложенности</li>
