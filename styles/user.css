@@ -31,7 +31,6 @@
 }
 
 section.slide h2 {
-    background: rgba(255, 255, 255, .7);
     display: inline-block;
     padding: 20px 40px;
     margin: 0 0 0 -40px;
@@ -101,7 +100,7 @@ section.slide.cover h2 {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-    color: #fff;
+    color: #b4b4b4;
     -webkit-tab-size: 4;
     -moz-tab-size: 4;
     -o-tab-size: 4;
@@ -109,16 +108,16 @@ section.slide.cover h2 {
     line-height: 1;
     font-family: 'PT Mono', monospace;
 
-    position: absolute;
-    display: none;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 50%;
-    overflow-y: auto;
+    /*position: absolute;*/
+    /*display: none;*/
+    /*left: 0;*/
+    /*top: 0;*/
+    /*width: 100%;*/
+    /*height: 50%;*/
+    /*overflow-y: auto;*/
 
-    box-sizing: border-box;
-    padding: 30px 0 0 30px;
+    /*box-sizing: border-box;*/
+    padding: 15px 0 0 15px;
 
     font-size: 120%;
 
@@ -130,7 +129,7 @@ section.slide.cover h2 {
 }
 
 .slide pre.console code {
-    color: #fff;
+    color: #b4b4b4;
 }
 
 button.run {
@@ -445,8 +444,9 @@ img.fullWidth {
 
 .console_position {
     position: absolute;
-    top: 304px;
+    top: 236px;
     left: 600px;
+    width: 350px;
 }
 
 .async_header {
@@ -454,4 +454,27 @@ img.fullWidth {
     top: 30px;
     left: 640px;
     text-align: right;
+}
+div.console_port {
+    background: black;
+    color: #b4b4b4;
+    padding: 15px;
+    box-sizing: border-box;
+    margin-top: 30px;
+}
+
+.console .attribute {
+    color: #b4b4b4;
+}
+
+.console .string {
+    color: #b4b4b4;
+}
+
+.console .value {
+    color: #b4b4b4;
+}
+
+.slide pre {
+    margin: 0 !important;
 }

@@ -236,7 +236,7 @@
         <code>    return filterUnpaidFines(fines, isUnpaidFines);</code>
         <code>});</code>
     </pre>
-
+    <br/>
     <pre class="javascript">
         <code>getUnpaidFines('A263BC')</code>
         <code>    .then(console.log.bind(console))</code>
@@ -273,19 +273,31 @@
         <code>foo('EkbJS');</code>
     </pre>
 
-    <h3>Console:</h3>
-    <pre class="javascript">
-        <code>&gt;</code>
-    </pre>
+    <div class="console_port">
+        <h3>Console:</h3>
+        <pre class="console">
+            <code>&gt;</code>
+        </pre>
+    </div>
 </section>
 
 <section class="slide">
     <h2><small>Generator.</small> Iterator</h2>
-    <h3>Объект:</h3>
+    <blockquote>An iterator is a structured pattern for pulling information from a source in one-at-a-time fashion.</blockquote>
     <ul>
-        <li><mark>next(..)</mark></li>
-        <li>return(..)</li>
-        <li>throw(..)</li>
+        <li>Iterator
+            <ul>
+                <li><b>next()</b> <i>{method}</i>: retrieves next IteratorResult</li>
+                <li><b>return()</b> <i>{method}</i>: stops iterator and returns IteratorResult</li>
+                <li><b>throw()</b> <i>{method}</i>: signals error and returns IteratorResult</li>
+            </ul>
+        </li>
+        <li>IteratorResult
+            <ul>
+                <li><b>value</b> <i>{property}</i>: current iteration value or final return value</li>
+                <li><b>done</b> <i>{property}</i>: boolean, indicates completion status</li>
+            </ul>
+        </li>
     </ul>
 </section>
 
@@ -300,10 +312,12 @@
         <code>it.next();</code>
     </pre>
 
-    <h3>Console:</h3>
-    <pre class="javascript">
-        <code>&gt; Hello, EkbJS</code>
-    </pre>
+    <div class="console_port">
+        <h3>Console:</h3>
+        <pre class="console">
+            <code>&gt; Hello, EkbJS</code>
+        </pre>
+    </div>
 </section>
 
 <section class="slide">
@@ -321,9 +335,9 @@
         <code>it.next();</code>
     </pre>
 
-    <div class="console_position">
+    <div class="console_position console_port">
         <h3>Console:</h3>
-        <pre>
+        <pre class="console">
             <code>&gt;</code>
             <code>&gt; Hello, EkbJS</code>
             <code>&gt;</code>
@@ -348,9 +362,9 @@
         <code>console.log(it.next());</code>
     </pre>
 
-    <div>
+    <div class="console_port">
         <h3>Console:</h3>
-        <pre>
+        <pre class="console">
             <code>&gt; {value: "Some data", done: false}</code>
             <code>&gt; {value: undefined, done: true}</code>
         </pre>
@@ -358,7 +372,7 @@
 </section>
 
 <section class="slide">
-    <h2><small>Generator.</small> Фибоначи</h2>
+    <h2><small>Generator.</small> Числа Фибоначчи</h2>
     <pre class="javascript">
         <code>function* fibonacci() {</code>
         <code>    var a = 0, b = 1, tmp;</code>
@@ -408,9 +422,9 @@
         <code><mark>it.next('EkbJS');</mark></code>
     </pre>
 
-    <div>
+    <div class="console_port">
         <h3>Console:</h3>
-        <pre>
+        <pre class="console">
             <code>&gt; Hello, EkbJS</code>
         </pre>
     </div>
@@ -425,7 +439,7 @@
         <code>    return filterUnpaidFines(fines, isUnpaidFines);</code>
         <code>});</code>
     </pre>
-
+    <br/>
     <pre class="javascript">
         <code>getUnpaidFines('A263BC')</code>
         <code>    .then(console.log.bind(console))</code>
@@ -456,7 +470,7 @@
 </section>
 
 <section class="slide">
-    <h2><small>Generator</small> Поддержка</h2>
+    <h2><small>Generator.</small> Поддержка</h2>
 
     <ul>
         <li>node >= 0.11 с флагом --harmony</li>
@@ -474,7 +488,7 @@
 </section>
 
 <section class="slide">
-    <h2><small>Generator</small> Babel</h2>
+    <h2><small>Generator.</small> Babel</h2>
     <div><a href="https://babeljs.io/">https://babeljs.io/</a></div>
     <ul>
         <li><a href="https://babeljs.io/docs/setup/">Setup</a>: CLI, Grunt, Gulp, Browserify, ..., WebStorm</li>
