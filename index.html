@@ -12,18 +12,14 @@
 <body class="list">
 <header class="caption">
     <h1>Generators</h1>
-
     <p>Жигалов Сергей</p>
 </header>
 <section class="slide first">
     <div class="arrow">
         <img src="images/yandex_lang_ru.svg" class="yandex"/>
-
         <h2>Generators</h2>
-
         <div class="info">
             <p class="author"><span class="first-red">С</span>ергей Жигалов</p>
-
             <p class="location">EkbJS, 2015г</p>
         </div>
     </div>
@@ -169,17 +165,17 @@
     <img src="images/bluebird.png" alt="bluebird" style="position: absolute; right: 90px;"/>
     <a href="https://github.com/petkaantonov/bluebird">https://github.com/petkaantonov/bluebird</a>
     <ul>
-        <li>Promise.promisify
+        <li>Promise.promisify(cb);
             <pre class="javascript">
-                <code>var myPromisifyFunction = Promise.promisify(myFunction)</code>
+                <code>var myPromisifyFunction = Promise.promisify(myFunction);</code>
                 <code> </code>
                 <code>function myFunction(arg1, arg2, cb) {</code>
-                <code>    cb(err, data)</code>
+                <code>    cb(err, data);</code>
                 <code>}</code>
             </pre>
         </li>
-        <li>Promise.all</li>
-        <li>Promise.props</li>
+        <li>Promise.all([...]);</li>
+        <li>Promise.props({...});</li>
     </ul>
 </section>
 
@@ -199,7 +195,7 @@
 </section>
 
 <section class="slide">
-    <h2>Код моей мечты</h2>
+    <h2>Идеальный код</h2>
     <pre class="javascript">
         <code>var getUnpaidFines = function(<mark>Ввести номер автомобиля</mark>) {</code>
         <code>    var fines = <mark>Получить список штрафов</mark>(carNumber);</code>
@@ -210,7 +206,7 @@
 </section>
 
 <section class="slide">
-    <h2>Код моей мечты</h2>
+    <h2>Идеальный код</h2>
     <pre class="javascript">
         <code>var getUnpaidFines = function (carNumber) {</code>
         <code>    var fines = getFinesByCarNumber(carNumber);</code>
@@ -221,13 +217,30 @@
 </section>
 
 <section class="slide">
-    <h2><small>Код моей мечты.</small> Generator</h2>
+    <h2><small>Идеальный код.</small> Generator</h2>
     <pre class="javascript">
         <code>var getUnpaidFines = co.wrap(function *(carNumber) {</code>
         <code>    var fines = yield getFinesByCarNumber(carNumber);</code>
         <code>    var isUnpaidFines = yield fines.map(isFineUnpaid);</code>
         <code>    return filterUnpaidFines(fines, isUnpaidFines);</code>
         <code>});</code>
+    </pre>
+</section>
+
+<section class="slide">
+    <h2><small>Идеальный код.</small> Generator</h2>
+    <pre class="javascript">
+        <code>var getUnpaidFines = co.wrap(function *(carNumber) {</code>
+        <code>    var fines = yield getFinesByCarNumber(carNumber);</code>
+        <code>    var isUnpaidFines = yield fines.map(isFineUnpaid);</code>
+        <code>    return filterUnpaidFines(fines, isUnpaidFines);</code>
+        <code>});</code>
+    </pre>
+
+    <pre class="javascript">
+        <code>getUnpaidFines('A263BC')</code>
+        <code>    .then(console.log.bind(console))</code>
+        <code>    .catch(console.error.bind(console));</code>
     </pre>
 </section>
 
@@ -412,6 +425,12 @@
         <code>    return filterUnpaidFines(fines, isUnpaidFines);</code>
         <code>});</code>
     </pre>
+
+    <pre class="javascript">
+        <code>getUnpaidFines('A263BC')</code>
+        <code>    .then(console.log.bind(console))</code>
+        <code>    .catch(console.error.bind(console));</code>
+    </pre>
 </section>
 
 <section class="slide">
@@ -419,16 +438,6 @@
     <blockquote>Generator based control flow goodness for nodejs and the browser, using promises,
         letting you write non-blocking code in a nice-ish way.</blockquote>
     <a href="https://github.com/tj/co">https://github.com/tj/co</a>
-</section>
-
-
-<section class="slide">
-    <h2><small>Generator.</small> Запуск</h2>
-    <pre class="javascript">
-        <code>getUnpaidFines('A263BC')</code>
-        <code>    .then(console.log.bind(console))</code>
-        <code>    .catch(console.error.bind(console));</code>
-    </pre>
 </section>
 
 <section class="slide">
@@ -452,7 +461,7 @@
     <ul>
         <li>node >= 0.11 с флагом --harmony</li>
         <li>iojs</li>
-        <li>Браузеры 15/21 <a href="https://clck.ru/9VKMq">https://clck.ru/9VKMq</a>:
+        <li>Браузеры <a href="https://clck.ru/9VKMq">https://clck.ru/9VKMq</a>:
             <ul class="custom-list">
                 <li class="done">Chrome 39.0</li>
                 <li class="done">Firefox 26.0</li>
@@ -482,6 +491,8 @@
     <h2>Ссылки</h2>
     <ul>
         <li><a href="https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/ch3.md#generators">You-Dont-Know-JS</a></li>
+        <li><a href="http://habrahabr.ru/post/182620/">Исследуем JavaScript Generators</a></li>
+        <li><a href="http://habrahabr.ru/post/210330/">Отказываемся от коллбэков: Генераторы в ECMAScript 6</a></li>
     </ul>
 </section>
 
@@ -489,9 +500,37 @@
     <div></div>
 </div>
 
+<script src="js/co.js"></script>
+<script src="js/bluebird.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/highlight.min.js"></script>
 <script src="js/shower.min.js"></script>
 <script src="js/index.js"></script>
+<script>
+    var getFinesByCarNumber = Promise.promisify(function getFinesByCarNumber(carNumber, cb) {
+        console.log('getFinesByCarNumber start', carNumber);
+        setTimeout(function () {
+            console.log('getFinesByCarNumber end', carNumber);
+            cb(null, ['001', '002', '003', '004', '005']);
+        }, 1000 * Math.random());
+    });
+    var isFineUnpaid = Promise.promisify(function isFineUnpaid(fine) {
+        var cb = arguments[arguments.length - 1];
+        console.log('isFineUnpaid start', fine);
+        setTimeout(function () {
+            console.log('isFineUnpaid end', fine);
+            cb(null, Math.random() > 0.5);
+        }, 2000 * Math.random());
+    });
+    var filterUnpaidFines = function filterUnpaidFines(fines, isUnpaidFines) {
+        var unpaidFines = [];
+        fines.forEach(function (fine, index) {
+            if (isUnpaidFines[index]) {
+                unpaidFines.push(fine);
+            }
+        });
+        return unpaidFines;
+    };
+</script>
 </body>
 </html>
