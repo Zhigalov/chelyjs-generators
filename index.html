@@ -58,8 +58,8 @@
     </pre>
 </section>
 
-<section class="slide cover w" style="text-align: center; ">
-    <img src="images/catIsSad.gif" alt="catIsSad" />
+<section class="slide cover w" style="text-align: center;">
+    <img class="myGif" src="images/catIsSad.gif" alt="catIsSad" />
 </section>
 
 <section class="slide">
@@ -229,7 +229,7 @@
 </section>
 
 <section class="slide cover w" style="text-align: center; ">
-    <img src="images/catsShock.gif" alt="catsShock" />
+    <img class="myGif" src="images/catsShock.gif" alt="catsShock" />
 </section>
 
 <section class="slide">
@@ -364,7 +364,7 @@
 </section>
 
 <section class="slide cover w" style="text-align: center; ">
-    <img src="images/orderMaster.gif" alt="catIsSad" />
+    <img class="myGif" src="images/orderMaster.gif" alt="catIsSad" />
 </section>
 
 <section class="slide">
@@ -373,8 +373,8 @@
         <code>function *order() {</code>
         <code>    yield 'Цезарь';</code>
         <code>    yield 'Окрошка';</code>
-        <code>    yield 'Шоколадный кексик';</code>
-        <code>    yield 'Компот';</code>
+        <code>    yield 'Шоколадный кексик с мороженкой';</code>
+        <code>    yield 'Компотик';</code>
         <code>}</code>
         <code> </code>
         <code>var it = order(); // Подходит официант</code>
@@ -388,8 +388,8 @@
         <code>function *order() {</code>
         <code>    yield 'Цезарь';</code>
         <code>    yield 'Окрошка';</code>
-        <code>    yield 'Шоколадный кексик';</code>
-        <code>    yield 'Компот';</code>
+        <code>    yield 'Шоколадный кексик с мороженкой';</code>
+        <code>    yield 'Компотик';</code>
         <code>}</code>
         <code> </code>
         <code>var it = order(); // Подходит официант</code>
@@ -404,8 +404,8 @@
         <code>function *order() {</code>
         <code>    yield 'Цезарь';</code>
         <code>    yield 'Окрошка';</code>
-        <code>    yield 'Шоколадный кексик';</code>
-        <code>    yield 'Компот';</code>
+        <code>    yield 'Шоколадный кексик с мороженкой';</code>
+        <code>    yield 'Компотик';</code>
         <code>}</code>
         <code> </code>
         <code>var it = order(); // Подходит официант</code>
@@ -421,8 +421,8 @@
         <code>function *order() {</code>
         <code>    yield 'Цезарь';</code>
         <code>    yield 'Окрошка';</code>
-        <code>    yield 'Шоколадный кексик';</code>
-        <code>    yield 'Компот';</code>
+        <code>    yield 'Шоколадный кексик с мороженкой';</code>
+        <code>    yield 'Компотик';</code>
         <code>}</code>
         <code> </code>
         <code>var it = order(); // Подходит официант</code>
@@ -439,8 +439,8 @@
         <code>function *order() {</code>
         <code>    yield 'Цезарь';</code>
         <code>    yield 'Окрошка';</code>
-        <code>    yield 'Шоколадный кексик';</code>
-        <code>    yield 'Компот';</code>
+        <code>    yield 'Шоколадный кексик с мороженкой';</code>
+        <code>    yield 'Компотик';</code>
         <code>}</code>
         <code> </code>
         <code>var it = order(); // Подходит официант</code>
@@ -544,12 +544,10 @@
     </ul>
 </section>
 
-<section class="slide cover w" style="text-align: center; ">
+<section class="slide">
     <h2>Спасибо за внимание!</h2>
-    <ul>
-        <li>zhigalov@yandex-team.ru</li>
-        <li>@sergey_zhigalov</li>
-    </ul>
+    <div><img src="images/mail.png" alt="mail" style="margin-right: 25px; vertical-align: middle;"/>zhigalov@yandex-team.ru</div>
+    <div><img src="images/twitter.png" alt="twitter" style="margin-right: 25px; vertical-align: middle;"/>@sergey_zhigalov</div>
 </section>
 
 <div class="progress">
@@ -587,6 +585,29 @@
         });
         return unpaidFines;
     };
+
+    $(function () {
+        document.addEventListener('keydown', function(e) {
+            try {
+                var currentSlideNumber = shower.getCurrentSlideNumber();
+
+                switch (e.which) {
+                    case 34: // PgDown
+                    case 40: // Down
+                    case 39: // Right
+                    case 76: // L
+                    case 74: // J
+
+                        var gif = $('section').eq(currentSlideNumber).find('.myGif');
+                        if (gif) {
+                            gif.attr('src', gif.attr('src'))
+                        }
+                        break;
+                }
+            } catch (e) {}
+        }, false);
+    })
+
 </script>
 </body>
 </html>
