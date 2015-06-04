@@ -127,17 +127,17 @@
 <section class="slide">
     <h2><small>Promises.</small> Bluebird</h2>
     <pre class="javascript">
-        <code>function myFunction(arg1, arg2, cb) {</code>
-        <code>    cb(err, data);</code>
-        <code>}</code>
-        <code> </code>
-        <code>var myPromisifyFunction = Promise.promisify(myFunction);</code>
-        <code>myPromisifyFunction()</code>
+        <code>myPromise()</code>
         <code>    .then(function onResolve() { return data; })</code>
         <code>    .then(function onResolve(data) { ... })</code>
         <code>    .catch(function onReject() { ... })</code>
+        <code> </code>
+        <code>function myFunction(arg1, arg2, cb) {</code>
+        <code>    cb(err, data);</code>
+        <code>}</code>
+        <code>var myPromisifyFunction = Promise.promisify(myFunction);</code>
     </pre>
-    <img src="images/bluebird.png" alt="bluebird" style="position: absolute; right: 90px; top: 400px;"/>
+    <img src="images/bluebird.png" alt="bluebird" style="position: absolute; right: 40px; top: 26px;"/>
     <div style="margin-top: 35px;">
         <a href="https://github.com/petkaantonov/bluebird">https://github.com/petkaantonov/bluebird</a><br/>
         <a href="https://vimeo.com/74925301">Михаил Давыдов "Promise – это не больно"</a>
@@ -196,7 +196,7 @@
 </section>
 
 <section class="slide">
-    <h2>Идеальный код</h2>
+    <h2>Мой идеальный код</h2>
     <pre class="javascript">
         <code>function getUnpaidFines(<mark>Ввести номер автомобиля</mark>) {</code>
         <code>    var fines = <mark>Получить список штрафов</mark>(carNumber);</code>
@@ -207,7 +207,7 @@
 </section>
 
 <section class="slide">
-    <h2>Идеальный код</h2>
+    <h2>Мой идеальный код</h2>
     <pre class="javascript">
         <code>function getUnpaidFines(carNumber) {</code>
         <code>    var fines = getFinesByCarNumber(carNumber);</code>
@@ -218,7 +218,7 @@
 </section>
 
 <section class="slide">
-    <h2><small>Идеальный код.</small> Generator</h2>
+    <h2><small>Мой идеальный код.</small> Generator</h2>
     <pre class="javascript">
         <code>function <mark>*</mark>getUnpaidFines(carNumber) {</code>
         <code>    var fines = <mark>yield</mark> getFinesByCarNumber(carNumber);</code>
@@ -233,7 +233,7 @@
 </section>
 
 <section class="slide">
-    <h2><small>Идеальный код.</small> Generator</h2>
+    <h2><small>Мой идеальный код.</small> Generator</h2>
     <pre class="javascript">
         <code><mark>co</mark>(function *getUnpaidFines(carNumber) {</code>
         <code>    var fines = yield getFinesByCarNumber(carNumber);</code>
@@ -319,13 +319,13 @@
 <section class="slide">
     <h2><small>Generator.</small> yield</h2>
     <pre class="javascript">
-        <code>function *foo(name) {</code>
-        <code>    console.log('Hello, ' + name);</code>
+        <code>function *foo() {</code>
+        <code>    console.log('1');</code>
         <code>    <mark>yield;</mark></code>
-        <code>    console.log('Goodbye, ' + name);</code>
+        <code>    console.log('2');</code>
         <code>}</code>
         <code> </code>
-        <code>var it = foo('EkbJS');</code>
+        <code>var it = foo();</code>
         <code>it.next();</code>
         <code>// Do somethings...</code>
         <code>it.next();</code>
@@ -335,9 +335,9 @@
         <h3>Console:</h3>
         <pre class="console">
             <code>&gt;</code>
-            <code>&gt; Hello, EkbJS</code>
+            <code>&gt; 1</code>
             <code>&gt;</code>
-            <code>&gt; Goodbye, EkbJS</code>
+            <code>&gt; 2</code>
         </pre>
     </div>
 </section>
@@ -381,14 +381,14 @@
     <blockquote>Generator based control flow goodness for nodejs and the browser, using promises,
         letting you write non-blocking code in a nice-ish way.</blockquote>
     <a href="https://github.com/tj/co">https://github.com/tj/co</a>
+    <br/>
+    <br/>
     <pre class="javascript">
         <code>co(function* () {</code>
         <code>    var value = yield Promise.resolve(true);</code>
         <code>    return value;</code>
         <code>}).then(function (value) {</code>
         <code>    console.log(value);</code>
-        <code>}, function (err) {</code>
-        <code>    console.error(err.stack);</code>
         <code>});</code>
     </pre>
 </section>
@@ -429,14 +429,19 @@
 <section class="slide">
     <h2><small>Generator.</small> Babel</h2>
     <div><a href="https://babeljs.io/">https://babeljs.io/</a></div>
+    <img src="images/babel.svg" alt="babel" style="position: absolute; height: 100px; right: 70px; top: 70px;"/>
     <ul>
-        <li><a href="https://babeljs.io/docs/setup/">Setup</a>: CLI, Grunt, Gulp, Browserify, ..., WebStorm</li>
         <li>myFile.jsx -> myFile.js</li>
-        <li>$ node myFile.js</li>
-    </ul>
-
-    <ul>
-        <li>$ babel-node async_generator.jsx</li>
+        <li><a href="https://babeljs.io/docs/setup/">Setup</a>:
+            <ul>
+                <li>CLI</li>
+                <li>Grunt</li>
+                <li>Gulp</li>
+                <li>Browserify</li>
+                <li>...</li>
+                <li>WebStorm</li>
+            </ul>
+        </li>
     </ul>
 </section>
 
@@ -446,6 +451,7 @@
         <li><a href="https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20&%20beyond/ch3.md#generators">You-Dont-Know-JS</a></li>
         <li><a href="http://habrahabr.ru/post/182620/">Исследуем JavaScript Generators</a></li>
         <li><a href="http://habrahabr.ru/post/210330/">Отказываемся от коллбэков: Генераторы в ECMAScript 6</a></li>
+        <li><a href="https://vimeo.com/74925301">Михаил Давыдов "Promise – это не больно"</a></li>
     </ul>
 </section>
 
